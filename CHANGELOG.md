@@ -1,3 +1,9 @@
+## [0.1.4](https://github.com/GiovanniCardamone/envpick/compare/v0.1.3...v0.1.4) (2022-04-09)
+
+### Bug Fixes
+
+-   main and types ([40e648c](https://github.com/GiovanniCardamone/envpick/commit/40e648cec57e00786bbb03d0ff2892bb9a3fa7ee))
+
 ## [0.1.3](https://github.com/GiovanniCardamone/envpick/compare/v0.1.2...v0.1.3) (2022-04-09)
 
 ### Bug Fixes
