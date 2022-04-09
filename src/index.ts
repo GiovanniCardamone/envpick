@@ -33,7 +33,7 @@ function error(key: Key, reason: string): never {
  * @throws {EnvError} when #key is missing
  */
 export function env(key: Key): string | never {
-	return process.env[key] ?? error(key, "not found");
+	return process.env[key] ?? error(key, "env variable not found");
 }
 
 /**
@@ -56,7 +56,9 @@ env.int = function (key: Key): number | never {
  * @throws {EnvError} when #key is missing
  */
 env.number = function (key: Key): number {
-	return Number(env(key));
+	const e = Number(env(key));
+
+	return Number.isNaN(e) ? error(key, "not a number") : e;
 };
 
 /**
@@ -114,15 +116,15 @@ env.transform = function <T>(
 	key: Key,
 	handler: (value: string) => T
 ): T | never {
-	return handler(env("key"));
+	return handler(env(key));
 };
 
 env.transformArray = function <T>(
 	key: Key,
-	separator: string = ",",
-	handler: (value: string) => T
+	handler: (value: string) => T,
+	separator: string = ","
 ): Array<T> | never {
-	return env.array(key).map(handler);
+	return env.array(key, separator).map(handler);
 };
 
 // ============================================================================
