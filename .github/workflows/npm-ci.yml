@@ -22,9 +22,20 @@ jobs:
         with:
           node-version: 14
 
-      # Show current package
-      - name: cat package.json
-        run: cat ./package.json
+      # Install Dependencies
+      - run: npm ci
+
+      # Build Package
+      - run: npm run build
+
+      # Run Tests & Coverage
+      - run: npm run coverage
+
+      # Report Coverage
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@1.1.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       # Bump version, tag commit and generate a changelog
       - name: Conventional Changelog Action
