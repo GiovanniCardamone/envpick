@@ -2,8 +2,8 @@
   "name": "envpick",
   "version": "0.1.5",
   "description": "Pick environment variable easly",
-  "main": "dist",
-  "types": "dist",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest",
