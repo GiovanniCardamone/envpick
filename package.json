@@ -4,6 +4,7 @@
   "description": "Pick environment variable easly",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "test": "jest",
     "coverage": "jest --coverage",
     "prepare": "husky install"
