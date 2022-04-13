@@ -1,3 +1,5 @@
+## [0.1.7](https://github.com/GiovanniCardamone/envpick/compare/v0.1.6...v0.1.7) (2022-04-13)
+
 ## [0.1.6](https://github.com/GiovanniCardamone/envpick/compare/v0.1.5...v0.1.6) (2022-04-09)
 
 ### Bug Fixes
