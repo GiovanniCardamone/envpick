@@ -1,4 +1,4 @@
-name: CI
+name: Create Release
 
 on:
   push:
@@ -9,9 +9,8 @@ on:
       - "*.md"
 
 jobs:
-  # create / release
-  Release:
-    name: Create Release Package
+  build:
+    name: Build Package
     runs-on: ubuntu-latest
     steps:
       # Checkout Repo
@@ -28,14 +27,25 @@ jobs:
       # Build Package
       - run: npm run build
 
-      # Run Tests & Coverage
-      - run: npm run coverage
+  release:
+    needs: Build
+    name: Create Release Package
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout Repo
+      - uses: actions/checkout@v2
 
-      # Report Coverage
-      - name: Coveralls GitHub Action
-        uses: coverallsapp/github-action@1.1.3
+      # Setup Node
+      - uses: actions/setup-node@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: 14
+
+      # Show current package
+      - name: cat package.json
+        run: cat ./package.json
+
+      # Install Dependencies
+      - run: npm ci
 
       # Bump version, tag commit and generate a changelog
       - name: Conventional Changelog Action
@@ -49,9 +59,3 @@ jobs:
           skip-on-empty: "false"
           skip-version-file: "false"
           skip-commit: "false"
-
-      # Publish to NPM
-      - name: Publish to NPM
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
